@@ -1,5 +1,5 @@
 import SignIn from "./SignIn";
-import SignOut from "./signOut";
+import SignOut from "./SignOut";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 const Nav = () => {

@@ -27,12 +27,12 @@ function SendMessage({scrollref}) {
     <>
       <form
         onSubmit={sendMessage}
-        className="h-14 w-full max-w-[22rem] sm:max-w-md md:max-w-lg lg:max-w-xl md:w-[728px] border-none rounded-full  flex text-xl absolute  bottom-5"
+        className="h-14 w-full max-w-[355px] sm:max-w-md md:max-w-lg lg:max-w-xl md:w-[728px] border-none rounded-full  flex text-xl absolute  bottom-5 sm:bottom-5 "
       >
         <input
           type="text"
           id="sendmsg" style={{boxShadow:'inset 4px 4px 8px rgba(0, 0, 0, 0.2), inset -4px -4px 8px rgba(255, 255, 255, 0.8)' }}
-          className="  w-full rounded-l-2xl  text-xl p-3 bg-white text-black outline-none border-none "
+          className="  w-full rounded-l-2xl  text-xl p-3 bg-white text-black outline-none border-none  "
           placeholder="Start typing here..."
           value={input}
           onChange={(e) => setInput(e.target.value)}

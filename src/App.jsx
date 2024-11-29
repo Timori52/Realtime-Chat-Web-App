@@ -11,8 +11,8 @@ function App() {
   const [user] = useAuthState(auth);
   return (
     <>
-      <div className="  sm:w-full md:w-[728px]   mx-auto  text-center mt-10 ">
-        <section className="flex flex-col rounded-2xl shadow-blue-400 shadow-2xl  bg-gray-100    h-[80vh]">
+      <div className=" flex  sm:w-[600px] md:w-[728px]    mx-auto  text-center justify-center mt-10 ">
+        <section className="flex w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl   mx-2 sm:mx-4 flex-col rounded-2xl shadow-blue-400 shadow-2xl  bg-gray-100    h-[80vh]">
           {/* Navbar */}
           <Nav />
           {/* Chat */}

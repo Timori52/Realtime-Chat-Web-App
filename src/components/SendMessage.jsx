@@ -27,7 +27,7 @@ function SendMessage({scrollref}) {
     <>
       <form
         onSubmit={sendMessage}
-        className="h-14 w-full md:w-[728px] border-none rounded-full  flex text-xl absolute  bottom-0"
+        className="h-14 w-full max-w-[22rem] sm:max-w-md md:max-w-lg lg:max-w-xl md:w-[728px] border-none rounded-full  flex text-xl absolute  bottom-5"
       >
         <input
           type="text"

@@ -6,4 +6,6 @@ html,body{
 }
 .root2 {
     background-image: url("./assets/pexels.jpg");
+   background-size: auto;
+    height: 100vh;
 }

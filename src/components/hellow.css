@@ -1,0 +1,39 @@
+.MessageContainer {
+   /* Aligns items to the start */
+  max-width: 100%; /* Prevents container from exceeding parent */
+  margin-bottom: 1rem; /* Adds space between message blocks */
+}
+
+.MessageContainer img {
+  width: 40px; /* Sets profile picture size */
+  height: 40px;
+  border-radius: 50%; /* Makes the image circular */
+  margin-right: 0.5rem; /* Adds space between image and message */
+}
+
+.MessageWrapper {
+  display: flex;
+  align-items: flex-start; /* Aligns image and message bubble */
+}
+
+.Message {
+  max-width: 70%; /* Limits the width of the message bubble */
+  word-wrap: break-word; /* Wraps long words */
+  overflow-wrap: break-word; /* Ensures long words break properly */
+  white-space: pre-wrap; /* Preserves spaces and line breaks */
+  padding: 10px 15px; /* Adds padding inside the bubble */
+  border-radius: 1.5rem; /* Rounds the edges of the bubble */
+  position: relative; /* Allows for name positioning */
+  margin-left: 1.5rem; /* Adds space between profile picture and bubble */
+}
+
+.MessageText {
+  overflow-wrap: anywhere; /* Ensures text breaks inside container */
+}
+
+
+.Name {
+  position: absolute; /* Positions name above the message */
+  top: -18px; /* Moves the name above the bubble */
+  
+}

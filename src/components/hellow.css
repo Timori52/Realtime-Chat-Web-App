@@ -23,8 +23,8 @@
   white-space: pre-wrap; /* Preserves spaces and line breaks */
   padding: 10px 15px; /* Adds padding inside the bubble */
   border-radius: 1.5rem; /* Rounds the edges of the bubble */
-  position: relative; /* Allows for name positioning */
-  margin-left: 1.5rem; /* Adds space between profile picture and bubble */
+  position: relative; 
+   margin-left: 1.5rem; /* Adds space between profile picture and bubble */
 }
 
 .MessageText {

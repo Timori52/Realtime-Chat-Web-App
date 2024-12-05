@@ -34,7 +34,7 @@ function Chat() {
     <>
       <div
         style={{ scrollbarWidth: "none" }}
-        className="flex flex-col  p-[1rem] overflow-y-auto    relative"
+        className="flex flex-col  p-[1rem] overflow-y-auto "
       >
         {messages?.map((message) => (
           <Message key={message.id} message={message} />

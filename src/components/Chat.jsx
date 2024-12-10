@@ -5,48 +5,38 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../firebase";
 import { useFCM } from "./FcmTokenContext";
 
-// eslint-disable-next-line react/prop-types
 function Chat() {
   const [messages, setMessages] = useState([]);
   const scrollref = useRef(null);
-  const {notificationPermission} = useFCM();
+  const { notificationPermission } = useFCM();
+
   useEffect(() => {
     const q = query(collection(db, "messages"), orderBy("timestamp"));
-    const fetchNewMsg = onSnapshot(q, (querySnapshot) => {
-      let messages = [];
-
-      querySnapshot.forEach((doc) => {
-        messages.push({ ...doc.data(), id: doc.id });
-      });
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const messages = [];
+      querySnapshot.forEach((doc) => messages.push({ ...doc.data(), id: doc.id }));
       setMessages(messages);
-
-      setTimeout(() => {
-        scrollref.current.scrollIntoView({ behavior: "smooth" });
-      }, 0);
+      scrollref.current.scrollIntoView({ behavior: "smooth" });
     });
-    
-    notificationPermission()
-    return () => fetchNewMsg();
-  }, []);
 
-  // useEffect(() => {
+    // Request notification permission on load
+    notificationPermission();
 
-  //     scrollref.current.scrollIntoView({ behavior: "smooth" });
-
-  // }, [messages]);
+    return () => unsubscribe();
+  }, [notificationPermission]);
 
   return (
     <>
       <div
         style={{ scrollbarWidth: "none" }}
-        className="flex flex-col  p-[1rem] overflow-y-auto "
+        className="flex flex-col p-[1rem] overflow-y-auto"
       >
         {messages?.map((message) => (
           <Message key={message.id} message={message} />
         ))}
         <div ref={scrollref}></div>
       </div>
-      <SendMessage  scrollref={scrollref} />
+      <SendMessage scrollref={scrollref} />
     </>
   );
 }

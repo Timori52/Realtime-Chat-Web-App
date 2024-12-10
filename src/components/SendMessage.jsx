@@ -17,7 +17,6 @@ const token = useFCM();
       text: input,
       timestamp: serverTimestamp(),
       name: displayName,
-      fcmToken:token,
       photoURL,
       uid,
     });

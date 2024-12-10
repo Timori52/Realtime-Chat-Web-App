@@ -2,25 +2,30 @@
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
 import { auth, db } from "../firebase";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { useFCM } from "./FcmTokenContext";
 
-
-function SendMessage({scrollref}) {
+function SendMessage({ scrollref }) {
   const [input, setInput] = useState("");
-
+const token = useFCM();
   async function sendMessage(e) {
     e.preventDefault();
-    const { displayName, uid, photoURL} = auth.currentUser;
+    const { displayName, uid, photoURL } = auth.currentUser;
     console.log(photoURL);
     await addDoc(collection(db, "messages"), {
       text: input,
       timestamp: serverTimestamp(),
       name: displayName,
+      fcmToken:token,
       photoURL,
       uid,
     });
+    console.log(token);
     
+
     setInput("");
-    scrollref.current.scrollIntoView({behavior: 'smooth'})
+    scrollref.current.scrollIntoView({ behavior: "smooth" });
   }
 
   return (
@@ -31,11 +36,15 @@ function SendMessage({scrollref}) {
       >
         <input
           type="text"
-          id="sendmsg" style={{boxShadow:'inset 4px 4px 8px rgba(0, 0, 0, 0.2), inset -4px -4px 8px rgba(255, 255, 255, 0.8)' }}
+          id="sendmsg"
+          style={{
+            boxShadow:
+              "inset 4px 4px 8px rgba(0, 0, 0, 0.2), inset -4px -4px 8px rgba(255, 255, 255, 0.8)",
+          }}
           className="  w-full rounded-l-2xl  text-xl p-3 bg-white text-black outline-none border-none  "
           placeholder="Start typing here..."
           value={input}
-          onChange={e => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
         />
         <button
           type="submit"
@@ -46,7 +55,7 @@ function SendMessage({scrollref}) {
               : "bg-green-500 hover:bg-green-400 hover:shadow-[0_0px_15px_5px_rgba(144,238,144,0.8)]"
           }`}
         >
-          Send
+          <FontAwesomeIcon icon={faPaperPlane} />
         </button>
       </form>
     </>

@@ -3,10 +3,13 @@ import Message from "./Message";
 import SendMessage from "./SendMessage";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../firebase";
+import { useFCM } from "./FcmTokenContext";
 
+// eslint-disable-next-line react/prop-types
 function Chat() {
   const [messages, setMessages] = useState([]);
   const scrollref = useRef(null);
+  const {notificationPermission} = useFCM();
   useEffect(() => {
     const q = query(collection(db, "messages"), orderBy("timestamp"));
     const fetchNewMsg = onSnapshot(q, (querySnapshot) => {
@@ -21,6 +24,8 @@ function Chat() {
         scrollref.current.scrollIntoView({ behavior: "smooth" });
       }, 0);
     });
+    
+    notificationPermission()
     return () => fetchNewMsg();
   }, []);
 
@@ -41,7 +46,7 @@ function Chat() {
         ))}
         <div ref={scrollref}></div>
       </div>
-      <SendMessage scrollref={scrollref} />
+      <SendMessage  scrollref={scrollref} />
     </>
   );
 }

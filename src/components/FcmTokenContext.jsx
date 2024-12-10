@@ -21,7 +21,6 @@ export  const  FcmTokenProvider = ({children}) => {
           console.log("HERE'S THE TOKEN", fcmToken);
         }
       };
-      notificationPermission();
    
 
 

@@ -8,7 +8,7 @@ import { useFCM } from "./FcmTokenContext";
 
 function SendMessage({ scrollref }) {
   const [input, setInput] = useState("");
-const token = useFCM();
+const {token} = useFCM();
   async function sendMessage(e) {
     e.preventDefault();
     const { displayName, uid, photoURL } = auth.currentUser;
@@ -19,6 +19,7 @@ const token = useFCM();
       name: displayName,
       photoURL,
       uid,
+      token
     });
     console.log(token);
     

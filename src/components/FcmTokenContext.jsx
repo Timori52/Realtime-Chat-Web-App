@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { createContext, useState, useContext, useEffect } from "react";
 import { messaging } from "../firebase.js";
 import { getToken } from "firebase/messaging";
@@ -32,6 +33,7 @@ export const FcmTokenProvider = ({ children }) => {
     }
   }, []);
 
+  
   return (
     <fcmContext.Provider value={{ token, notificationPermission }}>
       {children}

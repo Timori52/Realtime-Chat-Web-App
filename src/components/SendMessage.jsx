@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { auth, db } from "../firebase";
@@ -7,10 +8,9 @@ import { useFCM } from "./FcmTokenContext";
 
 function SendMessage({ scrollref }) {
   const [input, setInput] = useState("");
-  const { token, notificationPermission } = useFCM();
+  const { token, notificationPermission } = useFCM(); // apne custom hook jisme ki global states ko access karte hue
 
-  useEffect(() => {
-    // Ensure the token is fetched when the component is mounted
+  useEffect(() => { // running this useEffect in order ki jab koi msg send kare or notification permissioin available na ho to pehle wo kam ho!
     if (!token) {
       notificationPermission();
     }
@@ -18,15 +18,12 @@ function SendMessage({ scrollref }) {
 
   async function sendMessage(e) {
     e.preventDefault();
-    const { displayName, uid, photoURL } = auth.currentUser;
+    const { displayName, uid, photoURL } = auth.currentUser; //  jo logged in user hai uske object me ghus data lana
 
-    if (!token) {
-      alert("Token not available. Please allow notifications to continue.");
-      return;
-    }
+
 
     try {
-      await addDoc(collection(db, "messages"), {
+      await addDoc(collection(db, "messages"), { // sare data ko database me store krana
         text: input,
         timestamp: serverTimestamp(),
         name: displayName,
@@ -39,8 +36,22 @@ function SendMessage({ scrollref }) {
       console.error("Error sending message:", error);
     }
 
-    setInput("");
-    scrollref.current.scrollIntoView({ behavior: "smooth" });
+    setInput(""); // send karte hi input field empty krna  
+    scrollref.current.scrollIntoView({ behavior: "smooth" }); // new msg krte hi user ki screen ko niche lana smoothly
+
+    await fetch("http://localhost:5000/send-notification", { // es endpoint pr apna data store krana taki kahi bi devices pr notifications bheji ja sake
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        token: token, // token sending to the server to know ki kis device pr jaana hai
+        message: {
+          title: `${displayName} has sent a message`,
+          body: input,
+        },
+      }),
+    });
   }
 
   return (

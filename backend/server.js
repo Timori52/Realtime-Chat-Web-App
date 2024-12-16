@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 // Firebase Admin Initialization
-const serviceAccount = require('./my-chat-app-505c8-cde9f6c84212.json'); 
+const serviceAccount = require('./my-chat-app-505c8-f7580434f1ea.json'); 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });

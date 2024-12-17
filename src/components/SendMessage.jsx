@@ -39,7 +39,7 @@ function SendMessage({ scrollref }) {
     setInput(""); // send karte hi input field empty krna  
     scrollref.current.scrollIntoView({ behavior: "smooth" }); // new msg krte hi user ki screen ko niche lana smoothly
 
-    await fetch("http://localhost:5000/send-notification", { // es endpoint pr apna data store krana taki kahi bi devices pr notifications bheji ja sake
+    await fetch("https://realtime-chat-web-app-woia.onrender.com/send-notification", { // es endpoint pr apna data store krana taki kahi bi devices pr notifications bheji ja sake
       method: "POST",
       headers: {
         "Content-Type": "application/json",

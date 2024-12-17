@@ -1,6 +1,4 @@
-/* eslint-disable no-undef */
-require('dotenv').config(); // Load environment variables
-console.log('Loaded Service Account Key:', process.env.GOOGLE_SERVICE_ACCOUNT_KEY);
+require('dotenv').config(); 
 const express = require('express');
 const admin = require('firebase-admin');
 const cors = require('cors');

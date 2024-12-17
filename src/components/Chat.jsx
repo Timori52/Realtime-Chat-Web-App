@@ -16,11 +16,11 @@ function Chat() {
       const messages = [];
       querySnapshot.forEach((doc) => messages.push({ ...doc.data(), id: doc.id }));
       setMessages(messages);
-      scrollref.current.scrollIntoView({ behavior: "smooth" });
     });
-
+    
     // Request notification permission on load
     notificationPermission();
+    scrollref.current?.scrollIntoView({ behavior: "smooth" });
 
     return () => unsubscribe();
   }, [notificationPermission]);

@@ -14,7 +14,7 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
-app.post('/send-notification', async (req, res) => {
+app.post('https://realtime-chat-web-app-woia.onrender.com/send-notification', async (req, res) => {
   const { token, message } = req.body;
 const {body,title} = message;
   try {

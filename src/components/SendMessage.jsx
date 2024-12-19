@@ -8,12 +8,13 @@ import { useFCM } from "./FcmTokenContext";
 
 function SendMessage({ scrollref }) {
   const [input, setInput] = useState("");
-  const { token, notificationPermission } = useFCM(); // apne custom hook jisme ki global states ko access karte hue
+  const { token, notificationPermission, userId } = useFCM(); // apne custom hook jisme ki global states ko access karte hue
 
   useEffect(() => { // running this useEffect in order ki jab koi msg send kare or notification permissioin available na ho to pehle wo kam ho!
     if (!token) {
       notificationPermission();
     }
+
   }, [token, notificationPermission]);
 
   async function sendMessage(e) {
@@ -39,17 +40,17 @@ function SendMessage({ scrollref }) {
     setInput(""); // send karte hi input field empty krna  
     
     scrollref.current.scrollIntoView({ behavior: "smooth" }); // new msg krte hi user ki screen ko niche lana smoothly
-    await fetch("http://localhost:5000/send-notification", { // es endpoint pr apna data store krana taki kahi bi devices pr notifications bheji ja sake
+    await fetch("https://realtime-chat-web-app-woia.onrender.com/send-notification", { // es endpoint pr apna data store krana taki kahi bi devices pr notifications bheji ja sake
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        token: token, // token sending to the server to know ki kis device pr jaana hai
+        senderId: userId,
         message: {
           title: `${displayName} has sent a message`,
-          body: input,
-        },
+          body: input
+        }
       }),
     });
   }

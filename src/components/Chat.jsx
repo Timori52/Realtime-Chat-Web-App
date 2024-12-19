@@ -16,12 +16,15 @@ function Chat() {
       const messages = [];
       querySnapshot.forEach((doc) => messages.push({ ...doc.data(), id: doc.id }));
       setMessages(messages);
-      scrollref.current?.scrollIntoView({ behavior: "smooth" });
+      setTimeout(() => {
+        
+          scrollref.current.scrollIntoView({ behavior: "smooth" });
+      
+      }, 100);
     });
     
     // Request notification permission on load
     notificationPermission();
-
     return () => unsubscribe();
   }, [notificationPermission]);
 
@@ -34,7 +37,7 @@ function Chat() {
         {messages?.map((message) => (
           <Message key={message.id} message={message} />
         ))}
-        <div ref={scrollref}></div>
+        <span ref={scrollref}></span>
       </div>
       <SendMessage scrollref={scrollref} />
     </>

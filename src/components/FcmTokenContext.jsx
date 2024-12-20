@@ -42,7 +42,6 @@ export const FcmTokenProvider = ({ children }) => {
     // Automatically fetch the token on component mount if permission is already granted
     if (Notification.permission === "granted"  ) {
       notificationPermission();
-      // console.log(Notification.permission);
 
     }
   }, []);

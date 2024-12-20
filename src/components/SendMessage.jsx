@@ -58,7 +58,7 @@ function SendMessage({ scrollref }) {
   return (
     <form
       onSubmit={sendMessage}
-      className="h-14 w-full max-w-[388px] sm:max-w-[445px] md:max-w-lg lg:max-w-xl md:w-[728px] border-none rounded-full flex text-xl absolute bottom-5 sm:bottom-5"
+      className="h-14 w-full max-w-[388px] sm:max-w-[445px] md:max-w-lg lg:max-w-xl md:w-[728px] border-none rounded-full flex text-xl absolute bottom-3 sm:bottom-5"
     >
       <input
         type="text"

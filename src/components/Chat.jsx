@@ -25,7 +25,7 @@ function Chat() {
     
     // Request notification permission on load
     notificationPermission();
-    return () => unsubscribe();
+    return () => unsubscribe(); // ek cleanup function  taki onSnapshot method ki wajha se bar bar call na hota rhe or memory leakage se bachein
   }, [notificationPermission]);
 
   return (
@@ -37,9 +37,9 @@ function Chat() {
         {messages?.map((message) => (
           <Message key={message.id} message={message} />
         ))}
-        <span ref={scrollref}></span>
+        <span  ref={scrollref}></span>
       </div>
-      <SendMessage scrollref={scrollref} />
+      <SendMessage  scrollref={scrollref} />
     </>
   );
 }
